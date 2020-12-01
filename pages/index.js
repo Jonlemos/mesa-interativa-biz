@@ -1,65 +1,102 @@
-import Head from 'next/head'
+import React, {useState} from 'react'
 import styles from '../styles/Home.module.css'
+import Carding from '../styles/Carding.module.css'
+import Carousel from 'nuka-carousel'
+
+import {Header, Card,} from '../src/components'
+
 
 export default function Home() {
+  const [projects, setProjects ] = useState([
+    {
+      projeto: 'Sampling trident otima',
+      dataInit:'26/10',
+      dataFin:'02/11',
+      enderecos:[{
+        end: 'Av. Paulista, 800'
+      }]
+    },
+    {
+      projeto: 'Mesa Interativa',
+      dataInit:'26/10',
+      dataFin:'02/11',
+      enderecos:[
+        {
+        end: 'Av. Paulista, 900',},
+        {
+          end: 'Rua Fulano de Tal, 1100'
+        }
+      ]
+    },
+    {
+      projeto: 'Mesa Interativa',
+      dataInit:'26/10',
+      dataFin:'02/11',
+      enderecos:[{
+        end: 'Av. Ibirapuera, 900'
+      }]
+    },
+  ])
+
   return (
     <div className={styles.container}>
-      <Head>
+      <Header title='Mesa Interativa Bizsys'>
         <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      </Header>
+      <div className={styles.content}>
+        <div className={styles.fistColunm}>
+          <div className={styles.news}>
+            news
+          </div>
+          <div className={styles.cardNews}>
+            card  break news
+          </div>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
         </div>
-      </main>
+        <div className={styles.secondColunm}>
+          <div className={styles.weather}>
+            temperatura
+          </div>
+          <div className={styles.projects}>
+            <Card className={Carding.card} >
+              <h2 className={Carding.title}>Projetos</h2>
+              <svg style={{paddingLeft: 20}} width="324" height="33" viewBox="0 0 324 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 32H317.929C322.383 32 324.614 26.6143 321.464 23.4645L299 1" stroke="#2D2C29"/>
+              </svg>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+              <Carousel
+                defaultControlsConfig={{
+                  nextButtonClassName: Carding.buttonCarousel, 
+                  prevButtonClassName: Carding.buttonCarousel, 
+                  pagingDotsContainerClassName: Carding.dottes
+                }}
+                wrapAround={true}  
+                style={{ padding: 20, height: '89%' }}>
+
+                  {projects.map((project, i) =>(
+                    <div className={Carding.projectTitle} key={i}>
+                      <p className={Carding.endereco}>{project.projeto}</p>
+                      <p className={Carding.endereco}>Veiculação: {project.dataInit} - {project.dataFin}</p>
+                      <p className={Carding.endereco} style={{display:'flex'}}>
+                        Endereço: 
+                        {project.enderecos.map((endereco, i) => (
+                          <div style={{paddingRight:10}} key={i}>
+                            {endereco.end},
+                          </div>
+                        ))}
+                      </p>
+
+                      <a>Ler Mais</a>
+                    </div>
+                  ))}
+              </Carousel>
+            </Card>
+          </div>
+        </div>
+      </div>
+      <div className={styles.footer}>
+        <h1>Bizsys</h1>
+      </div>
     </div>
   )
 }

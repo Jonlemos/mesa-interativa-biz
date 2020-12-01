@@ -5,6 +5,40 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-image: url(../src/assets/images/background.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.content {
+  height: 85vh;
+  width: 90vw;
+  display: flex;
+}
+
+.fistColunm{
+  width: 55%;
+  height: 100%;
+}
+
+.secondColunm{
+  width: 45%;
+  height: 100%;
+}
+
+.news{
+ height: 63%;
+}
+
+.cardNews{
+  height: 37%;
+}
+
+.weather{
+  height: 52%;
+}
+
+.projects{
+  height: 48%;
 }
 
 .main {
@@ -16,34 +50,9 @@
   align-items: center;
 }
 
-.footer {
-  width: 100%;
-  height: 100px;
-  border-top: 1px solid #eaeaea;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.footer img {
-  margin-left: 0.5rem;
-}
-
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .title a {
   color: #0070f3;
   text-decoration: none;
-}
-
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
 }
 
 .title {
@@ -112,6 +121,18 @@
 
 .logo {
   height: 1em;
+}
+
+.footer{
+  width: 90%;
+  height: 15vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 155px;
+  color: #FFF8F3;
+  font-family: HORINZONTAL;
+  text-transform: uppercase;
 }
 
 @media (max-width: 600px) {
