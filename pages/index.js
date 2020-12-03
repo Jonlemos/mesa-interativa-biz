@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import styles from '../styles/Home.module.css'
 import Carding from '../styles/Carding.module.css'
 import Carousel from 'nuka-carousel'
@@ -6,10 +6,13 @@ import Carousel from 'nuka-carousel'
 import api from '../services/api';
 
 import {Header, Card,} from '../src/components'
+import axios from 'axios';
 
 
 export default function Home() {
   const [projects, setProjects] = useState({})
+  const [location, setLocation] = useState(false);
+  const [weather, setWeather] = useState(false);
 
   useEffect(() => {
     api.get('projects').then(response => {
@@ -18,6 +21,27 @@ export default function Home() {
 
     })
 
+  }, []);
+
+  let getWeather = async (lat, long) => {
+    let res = await axios.get("http://api.openweathermap.org/data/2.5/weather", {
+      params: {
+        lat: lat,
+        lon: long,
+        appid: process.env.REACT_APP_OPEN_WHEATHER_KEY,
+        lang: 'pt',
+        units: 'metric'
+      }
+    });
+    setWeather(res.data);
+    console.log(res.data)
+  }
+
+  useEffect(()=> {
+    navigator.geolocation.getCurrentPosition((position)=> {
+      getWeather(position.coords.latitude, position.coords.longitude);
+      setLocation(true)
+    })
   }, [])
 
   // const [projects, setProjects ] = useState([
@@ -91,7 +115,26 @@ export default function Home() {
               </g>
             </svg>
             </div>
-            <div className={styles.temp}>TEMPERATURA:</div>
+            { location ? 
+            <>
+              <h3>Clima nas suas Coordenadas (Exemplo) </h3>
+              <hr />
+              <ul>
+                <li>Temperatura atual: x°</li>
+                <li>Temperatura máxima: x°</li>
+                <li>Temperatura minima: x°</li>
+                <li>Pressão: x°</li>
+                <li>Umidade: x°</li>
+              </ul>
+            </>
+          
+            :<p> Sem localização </p>}
+
+    
+
+            <div className={styles.temp}>TEMPERATURA:
+              
+            </div>
             <div className={styles.globo}>GLOBO / Assets</div>
             <div className={styles.date}>DATE</div>
             <div className={styles.geolocalization}>LATITUDE E LONGITUDE</div>

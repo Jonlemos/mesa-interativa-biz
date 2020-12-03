@@ -135,11 +135,16 @@
   text-transform: uppercase;
 }
 
-.weather{
+.weather {
   color: white;
   padding-top: 25px;
   font-size: 40px
+}
 
+.temp {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  font-size: 26px;
 }
 
 @media (max-width: 600px) {
