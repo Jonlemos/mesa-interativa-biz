@@ -20,7 +20,6 @@ export default function Home() {
     })
 
   }, []);
-<<<<<<< HEAD
 
   function getUserPosition() {
     let url;
@@ -50,8 +49,6 @@ export default function Home() {
         })
       }
       // getUserPosition();
-=======
->>>>>>> 2818d6f5fbe7b2739efe7935e8b275d30f780b2c
 
   // const [projects, setProjects ] = useState([
   //   {
@@ -124,11 +121,7 @@ export default function Home() {
               </g>
             </svg>
             </div>
-<<<<<<< HEAD
            {/*  { location ? 
-=======
-            { location ? 
->>>>>>> 2818d6f5fbe7b2739efe7935e8b275d30f780b2c
             <>
               <h3>Clima nas suas Coordenadas (Exemplo) </h3>
               <hr />
@@ -139,7 +132,6 @@ export default function Home() {
               </ul>
             </>
           
-<<<<<<< HEAD
             :<p> Sem localização </p>} */}
 
     
@@ -152,14 +144,6 @@ export default function Home() {
                   <span>0</span>ºC
                 </h2>
               </p>
-=======
-            :<p> Sem localização </p>}
-
-    
-
-            <div className={styles.temp}>TEMPERATURA:
-              
->>>>>>> 2818d6f5fbe7b2739efe7935e8b275d30f780b2c
             </div>
             <div className={styles.globo}>GLOBO / Assets</div>
             <div className={styles.date}>DATE</div>
