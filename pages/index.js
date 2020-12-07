@@ -123,7 +123,6 @@ export default function Home() {
                 style={{ padding: 20, height: '89%' }}>
 
                   {
-
                   projects ? projects.map((project, i) =>(
                     <div className={Carding.projectTitle} key={i}>
                       <p className={Carding.endereco}>{project.name}</p>
