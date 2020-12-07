@@ -28,26 +28,26 @@ export default function Home() {
         url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&APPID=95b11822eb429c84c1143a19251b1881`;
     fetchApi(url);
     });
-}
+  }
 
-      function fetchApi(url) {
-          // let city = document.querySelector('.city');
-          let temp = document.querySelector('span');
-          fetch(url)
-          .then((data) => {
-              return data.json();
-          })
-          .then((data) => {
-              let tempInCelsius = ((5/9) * (data.main.temp-32)).toFixed(0);
-              // city.innerText = `Hoje a temperatura em ${data.name} é:`;
-              temp.innerText = tempInCelsius;
-          })
-          .catch((err) => {
-              city.innerText = `Impossível acessar o OpenWeather. Verifique a sua conexão.`;
-              temp.innerText = `-`;
-          })
-          }
-          getUserPosition();
+  function fetchApi(url) {
+      // let city = document.querySelector('.city');
+      let temp = document.querySelector('span');
+      fetch(url)
+      .then((data) => {
+          return data.json();
+      })
+      .then((data) => {
+          let tempInCelsius = ((5/9) * (data.main.temp-32)).toFixed(0);
+          // city.innerText = `Hoje a temperatura em ${data.name} é:`;
+          temp.innerText = tempInCelsius;
+      })
+      .catch((err) => {
+          city.innerText = `Impossível acessar o OpenWeather. Verifique a sua conexão.`;
+          temp.innerText = `-`;
+        })
+      }
+      // getUserPosition();
 
   // const [projects, setProjects ] = useState([
   //   {
@@ -149,7 +149,7 @@ export default function Home() {
             <div className={styles.geolocalization}>LATITUDE E LONGITUDE</div>
           </div>
           <div className={styles.projects}>
-            <Card className={Carding.card} >
+            <Card className={Carding.card}>
               <h2 className={Carding.title}>Projetos</h2>
               <svg style={{paddingLeft: 20}} width="324" height="33" viewBox="0 0 324 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 32H317.929C322.383 32 324.614 26.6143 321.464 23.4645L299 1" stroke="#2D2C29"/>
