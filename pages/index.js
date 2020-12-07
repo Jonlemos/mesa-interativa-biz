@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react'
 import styles from '../styles/Home.module.css'
 import Carding from '../styles/Carding.module.css'
 import Carousel from 'nuka-carousel'
+import axios from 'axios'
 
 import api from '../services/api';
 
 import {Header, Card,} from '../src/components'
-import axios from 'axios';
 
 
 export default function Home() {
-  const [projects, setProjects] = useState({})
+  const [projects, setProjects] = useState()
+  const [weather, setWeather] = useState()
 
   useEffect(() => {
     api.get('projects').then(response => {
@@ -21,68 +22,25 @@ export default function Home() {
 
   }, []);
 
-  function getUserPosition() {
+  useEffect(() => {
     let url;
-        navigator.geolocation.getCurrentPosition((pos) => {
+    navigator.geolocation.getCurrentPosition((pos) => {
     let lat = pos.coords.latitude;
     let long = pos.coords.longitude;
-        url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&APPID=95b11822eb429c84c1143a19251b1881`;
-    fetchApi(url);
-    });
-  }
+    url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&APPID=95b11822eb429c84c1143a19251b1881`;
 
-  function fetchApi(url) {
-      // let city = document.querySelector('.city');
-      let temp = document.querySelector('span');
-      fetch(url)
-      .then((data) => {
-          return data.json();
+    axios.get(url)
+      .then(function (response) {
+        setWeather(response.data);
+        
       })
-      .then((data) => {
-          let tempInCelsius = ((5/9) * (data.main.temp-32)).toFixed(0);
-          // city.innerText = `Hoje a temperatura em ${data.name} é:`;
-          temp.innerText = tempInCelsius;
+      .catch(function (error) {
+        console.log(error)
       })
-      .catch((err) => {
-          city.innerText = `Impossível acessar o OpenWeather. Verifique a sua conexão.`;
-          temp.innerText = `-`;
-        })
-      }
-      // getUserPosition();
-
-  // const [projects, setProjects ] = useState([
-  //   {
-  //     projeto: 'Sampling trident otima',
-  //     dataInit:'26/10',
-  //     dataFin:'02/11',
-  //     enderecos:[
-  //       {
-  //         end: 'Av. Paulista, 800'
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     projeto: 'Mesa Interativa',
-  //     dataInit:'26/10',
-  //     dataFin:'02/11',
-  //     enderecos:[
-  //       {
-  //         end: 'Av. Paulista, 900',
-  //       },
-  //       {
-  //         end: 'Rua Fulano de Tal, 1100'
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     projeto: 'Mesa Interativa',
-  //     dataInit:'26/10',
-  //     dataFin:'02/11',
-  //     enderecos:[{
-  //       end: 'Av. Ibirapuera, 900'
-  //     }]
-  //   },
-  // ]);
+    })
+    console.log(weather)
+    
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -139,9 +97,8 @@ export default function Home() {
             <div className={styles.temp}>
               <p>TEMPERATURA:</p>
               <p>
-                <h1 class="city"></h1>
                 <h2>
-                  <span>0</span>ºC
+                  <span>{weather ? `${((5/9) *(weather.main.temp-32)).toFixed(0)} ° `: 'Sem temperatura'}</span>
                 </h2>
               </p>
             </div>
@@ -167,7 +124,7 @@ export default function Home() {
 
                   {
 
-                  Object.keys(projects).length != 0 ? projects.map((project, i) =>(
+                  projects ? projects.map((project, i) =>(
                     <div className={Carding.projectTitle} key={i}>
                       <p className={Carding.endereco}>{project.name}</p>
                       <p className={Carding.endereco}>Veiculação: {project.initial_date} - {project.final_date}</p>
