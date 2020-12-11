@@ -140,11 +140,26 @@
   color: white;
 }
 
+.figures {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 30px;
+  padding-top: 60px;
+}
+
+.barra {
+  padding-top: 70px;
+  padding-bottom: 10px;
+}
+
+.logo {
+  padding-right: 0px;
+}
+
 .temp {
   padding-left: 20px;
   display: grid;
   grid-template-columns: 5fr 1fr;
-  grid-template-rows: 10vh, 5vh;
 }
 
 
